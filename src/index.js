@@ -19,9 +19,17 @@ module.exports = function extractAnchors(options = {}) {
 
   function visitor(node) {
     // TODO: Default header `levels` and check it to filter the `push`ed anchors
-    options.anchors.push({
-      title: node.children.length ? node.children[0].value : '',
-      id: node.data.id
-    });
+    options.anchors.push(
+      levels
+        ? {
+            title: node.children.length ? node.children[0].value : '',
+            id: node.data.id,
+            level: node.depth
+          }
+        : {
+            title: node.children.length ? node.children[0].value : '',
+            id: node.data.id
+          }
+    );
   }
 };
