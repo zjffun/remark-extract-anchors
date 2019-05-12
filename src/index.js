@@ -7,7 +7,7 @@ const visit = require('unist-util-visit');
  * @return {function}         - ...
  */
 module.exports = function extractAnchors(options = {}) {
-  let { anchors, levels } = options;
+  let { anchors } = options;
 
   if (!Array.isArray(anchors)) {
     throw new Error('Missing or malformed `anchors` in options.');
@@ -21,7 +21,8 @@ module.exports = function extractAnchors(options = {}) {
     // TODO: Default header `levels` and check it to filter the `push`ed anchors
     options.anchors.push({
       title: node.children.length ? node.children[0].value : '',
-      id: node.data.id
+      id: node.data.id,
+      level: node.depth
     });
   }
 };
